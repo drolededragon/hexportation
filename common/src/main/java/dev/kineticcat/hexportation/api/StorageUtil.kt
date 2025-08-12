@@ -7,10 +7,10 @@ import dev.kineticcat.hexportation.api.casting.iota.ConduitIota.Conduit
 import dev.kineticcat.hexportation.api.transfer.StorageUtil
 import dev.kineticcat.hexportation.api.transfer.EnergyStorageUtil
 import dev.kineticcat.hexportation.api.transfer.FluidConstants
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant
-import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant
-import net.fabricmc.fabric.api.transfer.v1.storage.StorageView
-import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction
+import dev.kineticcat.hexportation.api.transfer.FluidVariant
+import dev.kineticcat.hexportation.api.transfer.ItemVariant
+import dev.kineticcat.hexportation.api.transfer.StorageView
+import dev.kineticcat.hexportation.api.transfer.Transaction
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.entity.item.ItemEntity
 import net.minecraft.world.item.ItemStack
@@ -20,7 +20,7 @@ import net.minecraft.world.level.block.LiquidBlock
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
 import net.minecraft.world.level.material.Fluids
 import net.minecraft.world.phys.AABB
-import team.reborn.energy.api.EnergyStorage
+import dev.kineticcat.hexportation.api.transfer.EnergyStorage
 
 class Storage(val conduit: Conduit, val sLevel: ServerLevel) {
     enum class Modes {

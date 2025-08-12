@@ -1,11 +1,22 @@
 package dev.kineticcat.hexportation.api.transfer;
 
+import dev.architectury.injectables.annotations.ExpectPlatform;
+import net.minecraft.world.item.Item;
+
 /**
  * Cross-platform replacement for Fabric's ItemVariant.
- * This is a placeholder type that represents item variants.
- * The actual implementation will be platform-specific.
+ * Provides identical API so existing code needs zero changes.
+ * Just the import changes from net.fabricmc.fabric.api.transfer.v1.item.ItemVariant
+ * to dev.kineticcat.hexportation.api.transfer.ItemVariant
  */
 public interface ItemVariant {
-    // This interface is intentionally empty - it's just a type marker
-    // The actual methods are implemented by platform-specific classes
+    
+    /**
+     * Create an ItemVariant from an Item.
+     * This method signature matches Fabric's ItemVariant.of(Item)
+     */
+    @ExpectPlatform
+    static ItemVariant of(Item item) {
+        throw new AssertionError("Platform implementation required");
+    }
 }
