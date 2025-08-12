@@ -1,15 +1,14 @@
-package dev.kineticcat.hexportation.fabric.api.casting.iota;
+package dev.kineticcat.hexportation.api.casting.iota;
 
 import at.petrak.hexcasting.api.casting.iota.Iota;
 import at.petrak.hexcasting.api.casting.iota.IotaType;
 import at.petrak.hexcasting.api.utils.HexUtils;
 import kotlin.Pair;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
-import net.fabricmc.fabric.api.transfer.v1.item.ItemStorage;
-import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
-import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
-import net.fabricmc.fabric.api.transfer.v1.storage.TransferVariant;
+import dev.kineticcat.hexportation.api.transfer.FluidStorage;
+import dev.kineticcat.hexportation.api.transfer.FluidVariant;
+import dev.kineticcat.hexportation.api.transfer.ItemStorage;
+import dev.kineticcat.hexportation.api.transfer.ItemVariant;
+import dev.kineticcat.hexportation.api.transfer.Storage;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
