@@ -1,13 +1,14 @@
 @file:Suppress("UnstableApiUsage")
 
-package dev.kineticcat.hexportation.fabric.api
+package dev.kineticcat.hexportation.api
 
 import dev.kineticcat.hexportation.Hexportation
-import dev.kineticcat.hexportation.fabric.api.casting.iota.ConduitIota.Conduit
+import dev.kineticcat.hexportation.api.casting.iota.ConduitIota.Conduit
+import dev.kineticcat.hexportation.api.transfer.StorageUtil
+import dev.kineticcat.hexportation.api.transfer.EnergyStorageUtil
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant
-import net.fabricmc.fabric.api.transfer.v1.storage.StorageUtil
 import net.fabricmc.fabric.api.transfer.v1.storage.StorageView
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction
 import net.minecraft.server.level.ServerLevel
@@ -20,7 +21,6 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties
 import net.minecraft.world.level.material.Fluids
 import net.minecraft.world.phys.AABB
 import team.reborn.energy.api.EnergyStorage
-import team.reborn.energy.api.EnergyStorageUtil
 
 class Storage(val conduit: Conduit, val sLevel: ServerLevel) {
     enum class Modes {
