@@ -1,14 +1,14 @@
-package dev.kineticcat.hexportation.fabric.casting.actions
+package dev.kineticcat.hexportation.casting.actions
 
 import at.petrak.hexcasting.api.casting.castables.ConstMediaAction
 import at.petrak.hexcasting.api.casting.eval.CastingEnvironment
 import at.petrak.hexcasting.api.casting.iota.DoubleIota
 import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.casting.iota.ListIota
-import dev.kineticcat.hexportation.fabric.api.Storage
-import dev.kineticcat.hexportation.fabric.api.casting.iota.StorageViewIota
-import dev.kineticcat.hexportation.fabric.api.getConduit
-import net.fabricmc.fabric.api.transfer.v1.storage.StorageView
+import dev.kineticcat.hexportation.api.Storage
+import dev.kineticcat.hexportation.api.casting.iota.StorageViewIota
+import dev.kineticcat.hexportation.api.getConduit
+import dev.kineticcat.hexportation.api.transfer.StorageView
 
 class OpGetInvData(val sink: Boolean = false) : ConstMediaAction {
     override val argc = 1

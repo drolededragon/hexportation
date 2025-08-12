@@ -1,10 +1,10 @@
-package dev.kineticcat.hexportation.fabric.casting.actions
+package dev.kineticcat.hexportation.casting.actions
 
 import at.petrak.hexcasting.api.casting.castables.ConstMediaAction
 import at.petrak.hexcasting.api.casting.eval.CastingEnvironment
 import at.petrak.hexcasting.api.casting.iota.Iota
-import dev.kineticcat.hexportation.fabric.api.casting.iota.StorageViewIota.GenericStorageView
-import dev.kineticcat.hexportation.fabric.api.getView
+import dev.kineticcat.hexportation.api.casting.iota.StorageViewIota.GenericStorageView
+import dev.kineticcat.hexportation.api.getView
 import java.util.function.Function
 
 class OpGetViewData(val getter: Function<GenericStorageView, Iota>) : ConstMediaAction {

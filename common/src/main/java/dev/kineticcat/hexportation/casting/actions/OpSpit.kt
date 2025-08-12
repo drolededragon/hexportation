@@ -1,4 +1,4 @@
-package dev.kineticcat.hexportation.fabric.casting.actions
+package dev.kineticcat.hexportation.casting.actions
 
 import at.petrak.hexcasting.api.casting.ParticleSpray
 import at.petrak.hexcasting.api.casting.RenderedSpell
@@ -10,10 +10,10 @@ import at.petrak.hexcasting.api.casting.getPositiveInt
 import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.casting.mishaps.MishapInvalidIota
 import dev.kineticcat.hexportation.Hexportation
-import dev.kineticcat.hexportation.fabric.api.OpenEndedStorage
-import dev.kineticcat.hexportation.fabric.api.add
-import dev.kineticcat.hexportation.fabric.api.asVec3
-import dev.kineticcat.hexportation.fabric.api.getConduit
+import dev.kineticcat.hexportation.api.OpenEndedStorage
+import dev.kineticcat.hexportation.api.add
+import dev.kineticcat.hexportation.api.asVec3
+import dev.kineticcat.hexportation.api.getConduit
 import net.minecraft.world.entity.item.ItemEntity
 
 object OpSpit : SpellAction {

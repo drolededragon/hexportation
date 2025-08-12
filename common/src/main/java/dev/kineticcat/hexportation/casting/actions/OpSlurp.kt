@@ -1,4 +1,4 @@
-package dev.kineticcat.hexportation.fabric.casting.actions
+package dev.kineticcat.hexportation.casting.actions
 
 import at.petrak.hexcasting.api.casting.ParticleSpray
 import at.petrak.hexcasting.api.casting.RenderedSpell
@@ -8,8 +8,8 @@ import at.petrak.hexcasting.api.casting.eval.env.CircleCastEnv
 import at.petrak.hexcasting.api.casting.getPositiveInt
 import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.casting.mishaps.MishapInvalidIota
-import dev.kineticcat.hexportation.fabric.api.*
-import dev.kineticcat.hexportation.fabric.api.casting.iota.ConduitIota.Conduit
+import dev.kineticcat.hexportation.api.*
+import dev.kineticcat.hexportation.api.casting.iota.ConduitIota.Conduit
 import net.minecraft.world.phys.Vec3
 
 object OpSlurp : SpellAction {

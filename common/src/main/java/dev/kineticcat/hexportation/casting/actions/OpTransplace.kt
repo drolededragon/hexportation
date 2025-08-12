@@ -1,4 +1,4 @@
-package dev.kineticcat.hexportation.fabric.casting.actions
+package dev.kineticcat.hexportation.casting.actions
 
 import at.petrak.hexcasting.api.casting.ParticleSpray
 import at.petrak.hexcasting.api.casting.RenderedSpell
@@ -8,8 +8,8 @@ import at.petrak.hexcasting.api.casting.eval.env.CircleCastEnv
 import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.misc.MediaConstants
 import dev.architectury.event.events.client.ClientTooltipEvent.Render
-import dev.kineticcat.hexportation.fabric.api.casting.iota.ConduitIota.Conduit
-import dev.kineticcat.hexportation.fabric.api.getConduit
+import dev.kineticcat.hexportation.api.casting.iota.ConduitIota.Conduit
+import dev.kineticcat.hexportation.api.getConduit
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.phys.AABB
 
