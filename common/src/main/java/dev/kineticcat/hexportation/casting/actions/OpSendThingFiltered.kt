@@ -1,4 +1,4 @@
-package dev.kineticcat.hexportation.fabric.casting.actions
+package dev.kineticcat.hexportation.casting.actions
 
 import at.petrak.hexcasting.api.casting.ParticleSpray
 import at.petrak.hexcasting.api.casting.RenderedSpell
@@ -9,13 +9,13 @@ import at.petrak.hexcasting.api.casting.getList
 import at.petrak.hexcasting.api.casting.iota.DoubleIota
 import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.casting.mishaps.MishapInvalidIota
-import dev.kineticcat.hexportation.fabric.api.Storage
-import dev.kineticcat.hexportation.fabric.api.add
-import dev.kineticcat.hexportation.fabric.api.asVec3
-import dev.kineticcat.hexportation.fabric.api.getConduit
-import net.fabricmc.fabric.api.transfer.v1.storage.StorageUtil
-import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction
-import team.reborn.energy.api.EnergyStorageUtil
+import dev.kineticcat.hexportation.api.Storage
+import dev.kineticcat.hexportation.api.add
+import dev.kineticcat.hexportation.api.asVec3
+import dev.kineticcat.hexportation.api.getConduit
+import dev.kineticcat.hexportation.api.transfer.StorageUtil
+import dev.kineticcat.hexportation.api.transfer.Transaction
+import dev.kineticcat.hexportation.api.transfer.EnergyStorageUtil
 
 object OpSendThingFiltered : SpellAction{
     override val argc: Int = 2
