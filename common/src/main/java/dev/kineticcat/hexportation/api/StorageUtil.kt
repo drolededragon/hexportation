@@ -6,7 +6,7 @@ import dev.kineticcat.hexportation.Hexportation
 import dev.kineticcat.hexportation.api.casting.iota.ConduitIota.Conduit
 import dev.kineticcat.hexportation.api.transfer.StorageUtil
 import dev.kineticcat.hexportation.api.transfer.EnergyStorageUtil
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants
+import dev.kineticcat.hexportation.api.transfer.FluidConstants
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant
 import net.fabricmc.fabric.api.transfer.v1.storage.StorageView

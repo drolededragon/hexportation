@@ -1,13 +1,13 @@
-package dev.kineticcat.hexportation.fabric.api
+package dev.kineticcat.hexportation.api
 
 import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.casting.mishaps.MishapInvalidIota
 import at.petrak.hexcasting.api.casting.mishaps.MishapNotEnoughArgs
 import at.petrak.hexcasting.api.misc.MediaConstants
-import dev.kineticcat.hexportation.fabric.api.casting.iota.ConduitIota
-import dev.kineticcat.hexportation.fabric.api.casting.iota.ConduitIota.Conduit
-import dev.kineticcat.hexportation.fabric.api.casting.iota.StorageViewIota
-import dev.kineticcat.hexportation.fabric.api.casting.iota.StorageViewIota.GenericStorageView
+import dev.kineticcat.hexportation.api.casting.iota.ConduitIota
+import dev.kineticcat.hexportation.api.casting.iota.ConduitIota.Conduit
+import dev.kineticcat.hexportation.api.casting.iota.StorageViewIota
+import dev.kineticcat.hexportation.api.casting.iota.StorageViewIota.GenericStorageView
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants
 import net.minecraft.core.Vec3i
 import net.minecraft.world.phys.Vec3

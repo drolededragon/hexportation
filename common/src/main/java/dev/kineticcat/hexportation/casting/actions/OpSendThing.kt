@@ -1,4 +1,4 @@
-package dev.kineticcat.hexportation.fabric.casting.actions
+package dev.kineticcat.hexportation.casting.actions
 
 import at.petrak.hexcasting.api.casting.*
 import at.petrak.hexcasting.api.casting.castables.SpellAction
@@ -7,15 +7,15 @@ import at.petrak.hexcasting.api.casting.eval.env.CircleCastEnv
 import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.casting.mishaps.MishapInvalidIota
 import at.petrak.hexcasting.api.misc.MediaConstants
-import dev.kineticcat.hexportation.fabric.api.Storage
-import dev.kineticcat.hexportation.fabric.api.add
-import dev.kineticcat.hexportation.fabric.api.asVec3
-import dev.kineticcat.hexportation.fabric.api.casting.iota.ConduitIota.Conduit
-import dev.kineticcat.hexportation.fabric.api.getConduit
-import net.fabricmc.fabric.api.transfer.v1.storage.StorageUtil
+import dev.kineticcat.hexportation.api.Storage
+import dev.kineticcat.hexportation.api.add
+import dev.kineticcat.hexportation.api.asVec3
+import dev.kineticcat.hexportation.api.casting.iota.ConduitIota.Conduit
+import dev.kineticcat.hexportation.api.getConduit
+import dev.kineticcat.hexportation.api.transfer.StorageUtil
 
 import team.reborn.energy.api.EnergyStorage
-import team.reborn.energy.api.EnergyStorageUtil
+import dev.kineticcat.hexportation.api.transfer.EnergyStorageUtil
 
 
 object OpSendThing : SpellAction {
