@@ -14,7 +14,7 @@ import dev.kineticcat.hexportation.api.casting.iota.ConduitIota.Conduit
 import dev.kineticcat.hexportation.api.getConduit
 import dev.kineticcat.hexportation.api.transfer.StorageUtil
 
-import team.reborn.energy.api.EnergyStorage
+import dev.kineticcat.hexportation.api.transfer.EnergyStorage
 import dev.kineticcat.hexportation.api.transfer.EnergyStorageUtil
 
 

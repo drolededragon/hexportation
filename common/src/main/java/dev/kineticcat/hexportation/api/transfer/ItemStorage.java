@@ -16,7 +16,7 @@ public class ItemStorage {
     
     public static class SidedStorage {
         @ExpectPlatform
-        public Object find(ServerLevel level, BlockPos pos, Direction direction) {
+        public Storage<ItemVariant> find(ServerLevel level, BlockPos pos, Direction direction) {
             throw new AssertionError("Platform implementation required");
         }
     }

@@ -8,9 +8,9 @@ import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.casting.mishaps.MishapInvalidIota
 import at.petrak.hexcasting.api.misc.MediaConstants
 import dev.kineticcat.hexportation.Hexportation
-import dev.kineticcat.hexportation.fabric.api.Storage
-import dev.kineticcat.hexportation.fabric.api.casting.iota.ConduitIota
-import net.fabricmc.fabric.api.transfer.v1.item.ItemStorage
+import dev.kineticcat.hexportation.api.Storage
+import dev.kineticcat.hexportation.api.casting.iota.ConduitIota
+import dev.kineticcat.hexportation.api.transfer.ItemStorage
 import net.minecraft.core.Direction
 import org.joml.Vector3i
 

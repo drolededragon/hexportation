@@ -22,8 +22,17 @@ public class StorageUtil {
      * @return Amount actually moved
      */
     @ExpectPlatform
-    public static <T> long move(Object source, Object sink, 
-                               java.util.function.Predicate<T> filter, long maxAmount, Object transaction) {
+    public static <T> long move(Storage<T> source, Storage<T> sink, 
+                               java.util.function.Predicate<T> filter, long maxAmount, Transaction transaction) {
+        throw new AssertionError("Platform implementation required");
+    }
+    
+    /**
+     * Simulate extraction from a storage view.
+     * Exact same signature as Fabric's StorageUtil.simulateExtract()
+     */
+    @ExpectPlatform
+    public static <T> long simulateExtract(StorageView<T> storageView, T resource, long maxAmount, Transaction transaction) {
         throw new AssertionError("Platform implementation required");
     }
 }

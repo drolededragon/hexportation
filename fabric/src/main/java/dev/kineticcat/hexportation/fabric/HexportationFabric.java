@@ -1,8 +1,8 @@
 package dev.kineticcat.hexportation.fabric;
 
 import dev.kineticcat.hexportation.Hexportation;
-import dev.kineticcat.hexportation.fabric.api.casting.iota.HexportationIotaTypes;
-import dev.kineticcat.hexportation.fabric.casting.HexportationPatternRegistry;
+import dev.kineticcat.hexportation.api.casting.iota.HexportationIotaTypes;
+import dev.kineticcat.hexportation.casting.HexportationPatternRegistry;
 import net.fabricmc.api.ModInitializer;
 
 /**

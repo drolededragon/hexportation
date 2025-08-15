@@ -1,4 +1,4 @@
-package dev.kineticcat.hexportation.fabric.casting;
+package dev.kineticcat.hexportation.casting;
 
 
 import at.petrak.hexcasting.api.casting.ActionRegistryEntry;
@@ -10,8 +10,8 @@ import at.petrak.hexcasting.api.casting.math.HexDir;
 import at.petrak.hexcasting.api.casting.math.HexPattern;
 import at.petrak.hexcasting.common.lib.hex.HexActions;
 import dev.kineticcat.hexportation.Hexportation;
-import dev.kineticcat.hexportation.fabric.api.casting.iota.StorageViewIota;
-import dev.kineticcat.hexportation.fabric.casting.actions.*;
+import dev.kineticcat.hexportation.api.casting.iota.StorageViewIota;
+import dev.kineticcat.hexportation.casting.actions.*;
 import kotlin.jvm.functions.Function1;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;

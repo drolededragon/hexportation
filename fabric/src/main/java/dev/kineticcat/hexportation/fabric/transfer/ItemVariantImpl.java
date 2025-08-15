@@ -4,7 +4,7 @@ import dev.kineticcat.hexportation.api.transfer.ItemVariant;
 import net.minecraft.world.item.Item;
 
 /**
- * Fabric implementation that delegates to actual Fabric ItemVariant.of().
+ * Fabric implementation that delegates to actual Fabric ItemVariant.
  */
 public class ItemVariantImpl {
     

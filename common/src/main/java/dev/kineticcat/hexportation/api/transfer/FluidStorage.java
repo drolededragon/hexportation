@@ -16,7 +16,7 @@ public class FluidStorage {
     
     public static class SidedStorage {
         @ExpectPlatform
-        public Object find(ServerLevel level, BlockPos pos, Direction direction) {
+        public Storage<FluidVariant> find(ServerLevel level, BlockPos pos, Direction direction) {
             throw new AssertionError("Platform implementation required");
         }
     }

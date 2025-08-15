@@ -2,6 +2,7 @@ package dev.kineticcat.hexportation.api.transfer;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 
 /**
  * Cross-platform replacement for Fabric's ItemVariant.
@@ -19,4 +20,19 @@ public interface ItemVariant {
     static ItemVariant of(Item item) {
         throw new AssertionError("Platform implementation required");
     }
+    
+    /**
+     * Get the item from this variant.
+     */
+    Item getItem();
+    
+    /**
+     * Convert this variant to an ItemStack.
+     */
+    ItemStack toStack();
+    
+    /**
+     * Convert this variant to an ItemStack with a specific count.
+     */
+    ItemStack toStack(int count);
 }

@@ -2,10 +2,32 @@ package dev.kineticcat.hexportation.api.transfer;
 
 /**
  * Cross-platform replacement for Fabric's StorageView interface.
- * This is a placeholder type that represents storage views.
- * The actual implementation will be platform-specific.
+ * Provides identical API so existing code needs zero changes.
  */
 public interface StorageView<T> {
-    // This interface is intentionally empty - it's just a type marker
-    // The actual methods are implemented by platform-specific classes
+    
+    /**
+     * Get the resource stored in this view.
+     */
+    T getResource();
+    
+    /**
+     * Get the amount stored in this view.
+     */
+    long getAmount();
+    
+    /**
+     * Get the capacity of this view.
+     */
+    long getCapacity();
+    
+    /**
+     * Simulate extracting from this view.
+     */
+    long simulateExtract(T resource, long maxAmount, Object transaction);
+    
+    /**
+     * Extract from this view.
+     */
+    long extract(T resource, long maxAmount, Object transaction);
 }

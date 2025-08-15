@@ -4,12 +4,15 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 
+import dev.kineticcat.hexportation.api.transfer.EnergyStorage;
+
 /**
- * Fabric implementation that delegates to actual Team Reborn Energy EnergyStorage.SIDED.
+ * Fabric implementation that delegates to actual Team Reborn Energy EnergyStorage.
  */
 public class EnergyStorageImpl {
     
-    public static Object find(ServerLevel level, BlockPos pos, Direction direction) {
-        return team.reborn.energy.api.EnergyStorage.SIDED.find(level, pos, direction);
+    public static EnergyStorage find(ServerLevel level, BlockPos pos, Direction direction) {
+        // Cast the Team Reborn EnergyStorage to our interface - this works because both are interfaces
+        return (EnergyStorage) team.reborn.energy.api.EnergyStorage.SIDED.find(level, pos, direction);
     }
 }

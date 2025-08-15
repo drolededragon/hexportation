@@ -1,4 +1,4 @@
-package dev.kineticcat.hexportation.fabric.api.casting.iota;
+package dev.kineticcat.hexportation.api.casting.iota;
 
 import at.petrak.hexcasting.api.casting.iota.Iota;
 import at.petrak.hexcasting.api.casting.iota.IotaType;

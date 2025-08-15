@@ -1,15 +1,18 @@
 package dev.kineticcat.hexportation.fabric.transfer;
 
+import dev.kineticcat.hexportation.api.transfer.Storage;
+import dev.kineticcat.hexportation.api.transfer.FluidVariant;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 
 /**
- * Fabric implementation that delegates to actual Fabric FluidStorage.SIDED.
+ * Fabric implementation that delegates to actual Fabric FluidStorage.SIDED.find().
  */
 public class FluidStorageImpl {
     
-    public static Object find(ServerLevel level, BlockPos pos, Direction direction) {
-        return net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage.SIDED.find(level, pos, direction);
+    public static Storage<FluidVariant> find(ServerLevel level, BlockPos pos, Direction direction) {
+        // Cast the Fabric Storage to our interface - this works because both are interfaces
+        return (Storage<FluidVariant>) net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage.SIDED.find(level, pos, direction);
     }
 }
