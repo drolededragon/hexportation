@@ -2,7 +2,7 @@ package dev.kineticcat.hexportation.fabric;
 
 import dev.architectury.platform.Platform;
 import dev.kineticcat.hexportation.Hexportation;
-import dev.kineticcat.hexportation.fabric.api.config.ComplexhexConfig;
+import dev.kineticcat.hexportation.api.config.ComplexhexConfig;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;

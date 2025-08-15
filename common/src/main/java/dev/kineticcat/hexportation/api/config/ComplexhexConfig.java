@@ -1,4 +1,4 @@
-package dev.kineticcat.hexportation.fabric.api.config;
+package dev.kineticcat.hexportation.api.config;
 
 import dev.kineticcat.hexportation.Hexportation;
 
