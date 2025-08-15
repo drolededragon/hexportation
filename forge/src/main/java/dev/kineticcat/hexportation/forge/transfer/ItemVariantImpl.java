@@ -14,6 +14,10 @@ public class ItemVariantImpl {
         return new ItemStackWrapper(new ItemStack(item));
     }
     
+    public static ItemVariant blank() {
+        return new ItemStackWrapper(ItemStack.EMPTY);
+    }
+    
     /**
      * Wrapper class that implements our ItemVariant interface using Forge's ItemStack.
      */
@@ -43,6 +47,26 @@ public class ItemVariantImpl {
         
         public ItemStack getItemStack() {
             return itemStack;
+        }
+        
+        @Override
+        public boolean equals(Object obj) {
+            if (this == obj) return true;
+            if (!(obj instanceof ItemVariant)) return false;
+            
+            // Compare items - for Forge we only care about the Item type, not NBT for now
+            if (obj instanceof ItemStackWrapper other) {
+                return this.itemStack.getItem() == other.itemStack.getItem();
+            }
+            
+            // Generic ItemVariant comparison
+            ItemVariant other = (ItemVariant) obj;
+            return this.getItem() == other.getItem();
+        }
+        
+        @Override
+        public int hashCode() {
+            return itemStack.getItem().hashCode();
         }
     }
 }

@@ -22,6 +22,16 @@ public interface ItemVariant {
     }
     
     /**
+     * Create a blank (empty) ItemVariant.
+     * This method signature matches Fabric's ItemVariant.blank()
+     * Used for representing empty slots and comparisons.
+     */
+    @ExpectPlatform
+    static ItemVariant blank() {
+        throw new AssertionError("Platform implementation required");
+    }
+    
+    /**
      * Get the item from this variant.
      */
     Item getItem();

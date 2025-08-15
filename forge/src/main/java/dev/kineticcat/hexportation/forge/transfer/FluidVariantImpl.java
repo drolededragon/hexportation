@@ -23,6 +23,10 @@ public class FluidVariantImpl {
         return new FluidStackWrapper(fluidStack);
     }
     
+    public static FluidVariant fromFluidStack(FluidStack fluidStack) {
+        return new FluidStackWrapper(fluidStack);
+    }
+    
     /**
      * Wrapper class that implements our FluidVariant interface using Forge's FluidStack.
      */

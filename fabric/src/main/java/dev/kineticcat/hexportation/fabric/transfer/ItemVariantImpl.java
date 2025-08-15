@@ -12,4 +12,9 @@ public class ItemVariantImpl {
         // Cast the Fabric ItemVariant to our interface - this works because both are interfaces
         return (ItemVariant) net.fabricmc.fabric.api.transfer.v1.item.ItemVariant.of(item);
     }
+    
+    public static ItemVariant blank() {
+        // Cast the Fabric ItemVariant to our interface - this works because both are interfaces
+        return (ItemVariant) net.fabricmc.fabric.api.transfer.v1.item.ItemVariant.blank();
+    }
 }
