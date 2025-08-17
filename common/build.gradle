@@ -20,10 +20,11 @@ dependencies {
     implementation group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.2' // for @Nonnull
 
     modCompileOnly "at.petra-k.paucal:paucal-common-$minecraftVersion:$paucalVersion"
-    modCompileOnly "at.petra-k.hexcasting:hexcasting-fabric-$minecraftVersion:$hexcastingVersion"
+    modCompileOnly "at.petra-k.hexcasting:hexcasting-common-$minecraftVersion:$hexcastingVersion"
     modCompileOnly "vazkii.patchouli:Patchouli-xplat:$minecraftVersion-$patchouliVersion"
     modCompileOnly files("${rootProject.rootDir}/lib/moreiotas-fabric-1.20.1-0.1.0-4.jar")
-    implementation group: "org.jblas", name: "jblas", version: "1.2.5"
+    // jblas commented out to avoid module conflicts with other mods (moreiotas, etc.)
+    // implementation group: "org.jblas", name: "jblas", version: "1.2.5"
     implementation "org.joml:joml:1.10.8"
 
 }

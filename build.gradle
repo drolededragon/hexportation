@@ -48,7 +48,9 @@ subprojects {
     sourceSets.main.resources.srcDirs += "src/generated/resources"
 
     dependencies {
-        implementation group: "org.jblas", name: "jblas", version: "1.2.5"
+        // jblas commented out to avoid module conflicts with other mods (moreiotas, etc.)
+        // uncomment if needed by future development
+        // implementation group: "org.jblas", name: "jblas", version: "1.2.5"
     }
 }
 
@@ -150,6 +152,7 @@ allprojects {
             "forgeDependencyVersion": project.forgeDependencyVersion,
             "forgeKotlinVersion": project.forgeKotlinVersion,
             "hexcastingVersion": project.hexcastingVersion,
+            "hexcastingDependencyVersion": project.hexcastingDependencyVersion,
             "minecraftVersion": project.minecraftVersion,
         ]
 

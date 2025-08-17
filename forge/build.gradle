@@ -15,8 +15,8 @@ loom {
         convertAccessWideners = true
         extraAccessWideners.add loom.accessWidenerPath.get().asFile.name
 
-        mixinConfig "complexhex-common.mixins.json"
-        mixinConfig "complexhex-forge.mixins.json"
+        mixinConfig "hexportation-common.mixins.json"
+        mixinConfig "hexportation-forge.mixins.json"
     }
 }
 
@@ -48,7 +48,6 @@ dependencies {
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }
-    shade 'org.jblas:jblas:1.2.5'
 }
 
 processResources {
@@ -109,7 +108,7 @@ publishMods {
     modLoaders.add("forge")
 
     version = project.version + "-forge"
-    displayName = "Complex Hex $project.version [Forge]"
+    displayName = "Hexportation $project.version [Forge]"
 
     // Uncomment your desired platform(s)
 //    curseforge {
