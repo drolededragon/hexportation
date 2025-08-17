@@ -6,7 +6,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 /**
  * Forge client loading entrypoint.
  */
-public class ComplexhexClientForge {
+public class HexportationClientForge {
     public static void init(FMLClientSetupEvent event) {
         HexportationClient.init();
     }

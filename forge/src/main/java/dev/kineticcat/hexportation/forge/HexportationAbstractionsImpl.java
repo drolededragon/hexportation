@@ -5,7 +5,7 @@ import net.minecraftforge.fml.loading.FMLPaths;
 
 import java.nio.file.Path;
 
-public class ComplexhexAbstractionsImpl {
+public class HexportationAbstractionsImpl {
     /**
      * This is the actual implementation of {@link HexportationAbstractions#getConfigDirectory()}.
      */
@@ -14,6 +14,6 @@ public class ComplexhexAbstractionsImpl {
     }
 	
     public static void initPlatformSpecific() {
-        ComplexhexConfigForge.init();
+        HexportationConfigForge.init();
     }
 }

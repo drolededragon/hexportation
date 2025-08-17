@@ -7,7 +7,7 @@ import dev.kineticcat.hexportation.Hexportation;
  * If any of the config types (common, client, server) are not needed in your mod,
  * feel free to remove anything related to them in this class and platform-specific config implementations.
  */
-public class ComplexhexConfig {
+public class HexportationConfig {
     private static final CommonConfigAccess dummyCommon = new CommonConfigAccess() {
     };
     private static final ClientConfigAccess dummyClient = new ClientConfigAccess() {
@@ -23,10 +23,10 @@ public class ComplexhexConfig {
     }
 
     public static void setCommon(CommonConfigAccess common) {
-        if (ComplexhexConfig.common != dummyCommon) {
-            Hexportation.LOGGER.warn("CommonConfigAccess was replaced! Old {} New {}", ComplexhexConfig.common.getClass().getName(), common.getClass().getName());
+        if (HexportationConfig.common != dummyCommon) {
+            Hexportation.LOGGER.warn("CommonConfigAccess was replaced! Old {} New {}", HexportationConfig.common.getClass().getName(), common.getClass().getName());
         }
-        ComplexhexConfig.common = common;
+        HexportationConfig.common = common;
     }
 
     public static ClientConfigAccess getClient() {
@@ -34,10 +34,10 @@ public class ComplexhexConfig {
     }
 
     public static void setClient(ClientConfigAccess client) {
-        if (ComplexhexConfig.client != dummyClient) {
-            Hexportation.LOGGER.warn("ClientConfigAccess was replaced! Old {} New {}", ComplexhexConfig.client.getClass().getName(), client.getClass().getName());
+        if (HexportationConfig.client != dummyClient) {
+            Hexportation.LOGGER.warn("ClientConfigAccess was replaced! Old {} New {}", HexportationConfig.client.getClass().getName(), client.getClass().getName());
         }
-        ComplexhexConfig.client = client;
+        HexportationConfig.client = client;
     }
 
     public static ServerConfigAccess getServer() {
@@ -46,10 +46,10 @@ public class ComplexhexConfig {
 
     public static void setServer(ServerConfigAccess server) {
 
-        if (ComplexhexConfig.server != dummyServer) {
-            Hexportation.LOGGER.warn("ServerConfigAccess was replaced! Old {} New {}", ComplexhexConfig.server.getClass().getName(), server.getClass().getName());
+        if (HexportationConfig.server != dummyServer) {
+            Hexportation.LOGGER.warn("ServerConfigAccess was replaced! Old {} New {}", HexportationConfig.server.getClass().getName(), server.getClass().getName());
         }
-        ComplexhexConfig.server = server;
+        HexportationConfig.server = server;
     }
 
     public static int bound(int toBind, int lower, int upper) {

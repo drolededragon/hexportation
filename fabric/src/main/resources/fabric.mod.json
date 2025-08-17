@@ -32,6 +32,6 @@
     "fabric-api": "*",
     "fabric-language-kotlin": ">=${fabricKotlinVersion}",
     "architectury": ">=${architecturyVersion}",
-    "hexcasting": ">=${hexcastingVersion}"
+    "hexcasting": ">=${hexcastingDependencyVersion}"
   }
 }

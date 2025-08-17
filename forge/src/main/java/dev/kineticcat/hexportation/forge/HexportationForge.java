@@ -11,12 +11,12 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
  * something platform-specific.
  */
 @Mod(Hexportation.MOD_ID)
-public class ComplexhexForge {
-    public ComplexhexForge() {
+public class HexportationForge {
+    public HexportationForge() {
         // Submit our event bus to let architectury register our content on the right time
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         EventBuses.registerModEventBus(Hexportation.MOD_ID, bus);
-        bus.addListener(ComplexhexClientForge::init);
+        bus.addListener(HexportationClientForge::init);
         Hexportation.init();
     }
 }
