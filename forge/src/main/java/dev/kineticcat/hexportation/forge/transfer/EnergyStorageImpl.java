@@ -64,6 +64,22 @@ public class EnergyStorageImpl {
             return forgeStorage.getMaxEnergyStored();
         }
         
+        public long simulateExtract(long maxExtract) {
+            return forgeStorage.extractEnergy((int) Math.min(maxExtract, Integer.MAX_VALUE), true);
+        }
+        
+        public long simulateInsert(long maxInsert) {
+            return forgeStorage.receiveEnergy((int) Math.min(maxInsert, Integer.MAX_VALUE), true);
+        }
+        
+        public long extract(long maxExtract, boolean simulate) {
+            return forgeStorage.extractEnergy((int) Math.min(maxExtract, Integer.MAX_VALUE), simulate);
+        }
+        
+        public long insert(long maxInsert, boolean simulate) {
+            return forgeStorage.receiveEnergy((int) Math.min(maxInsert, Integer.MAX_VALUE), simulate);
+        }
+        
         public IEnergyStorage getForgeStorage() {
             return forgeStorage;
         }
