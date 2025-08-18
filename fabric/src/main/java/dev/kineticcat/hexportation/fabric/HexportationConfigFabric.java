@@ -2,7 +2,7 @@ package dev.kineticcat.hexportation.fabric;
 
 import dev.architectury.platform.Platform;
 import dev.kineticcat.hexportation.Hexportation;
-import dev.kineticcat.hexportation.api.config.ComplexhexConfig;
+import dev.kineticcat.hexportation.api.config.HexportationConfig;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
@@ -30,27 +30,27 @@ public class HexportationConfigFabric extends PartitioningSerializer.GlobalData 
         AutoConfig.register(HexportationConfigFabric.class, PartitioningSerializer.wrap(JanksonConfigSerializer::new));
         var instance = AutoConfig.getConfigHolder(HexportationConfigFabric.class).getConfig();
 
-        ComplexhexConfig.setCommon(instance.common);
+        HexportationConfig.setCommon(instance.common);
 
         if (Platform.getEnv().equals(EnvType.CLIENT)) {
-            ComplexhexConfig.setClient(instance.client);
+            HexportationConfig.setClient(instance.client);
         }
 
         // Needed for logical server in singleplayer, do not access server configs from client code
-        ComplexhexConfig.setServer(instance.server);
+        HexportationConfig.setServer(instance.server);
     }
 
 
     @Config(name = "common")
-    private static class Common implements ConfigData, ComplexhexConfig.CommonConfigAccess {
+    private static class Common implements ConfigData, HexportationConfig.CommonConfigAccess {
     }
 
     @Config(name = "client")
-    private static class Client implements ConfigData, ComplexhexConfig.ClientConfigAccess {
+    private static class Client implements ConfigData, HexportationConfig.ClientConfigAccess {
     }
 
 
     @Config(name = "server")
-    private static class Server implements ConfigData, ComplexhexConfig.ServerConfigAccess {
+    private static class Server implements ConfigData, HexportationConfig.ServerConfigAccess {
     }
 }
