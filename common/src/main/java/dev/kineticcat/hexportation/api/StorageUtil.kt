@@ -37,9 +37,9 @@ class Storage(val conduit: Conduit, val sLevel: ServerLevel) {
 
     fun getModeOrNull(): Modes? {
         return when {
-            conduit.getItemStoragesOrNull(sLevel).let {(source, sink) -> source != null && sink != null} -> Modes.ITEM
             conduit.getFluidStoragesOrNull(sLevel).let {(source, sink) -> source != null && sink != null} -> Modes.FLUID
             conduit.getEnergyStoragesOrNull(sLevel).let {(source, sink) -> source != null && sink != null} -> Modes.ENERGY
+            conduit.getItemStoragesOrNull(sLevel).let {(source, sink) -> source != null && sink != null} -> Modes.ITEM
             else -> null
         }
     }

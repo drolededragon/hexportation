@@ -86,8 +86,11 @@ public class ConduitIota extends Iota {
         public Pair<EnergyStorage, EnergyStorage> getEnergyStoragesOrNull(ServerLevel sLevel) {
             EnergyStorage sourceStorage = EnergyStorage.SIDED.find(sLevel, source, sourceDir);
             EnergyStorage sinkStorage = EnergyStorage.SIDED.find(sLevel, sink, sinkDir);
-            if (sourceStorage != null && sinkStorage != null) return new Pair<>(sourceStorage, sinkStorage);
-            else return null;
+            return new Pair<>(sourceStorage, sinkStorage);
+            
+            // Original author's logic (commented out for consistency with other storage types):
+            // if (sourceStorage != null && sinkStorage != null) return new Pair<>(sourceStorage, sinkStorage);
+            // else return null;
         }
 
     }

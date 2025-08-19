@@ -1,6 +1,6 @@
 {
   "name": "hexportation.entry.conduit",
-  "category": "hexcasting:patterns/great_spells",
+  "category": "hexcasting:patterns/spells",
   "icon": "minecraft:hopper",
   "sortnum": 7,
   "advancement": "hexcasting:root",
