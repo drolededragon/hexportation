@@ -14,15 +14,36 @@ import net.minecraftforge.energy.IEnergyStorage;
  */
 public class EnergyStorageImpl {
     
-    public static EnergyStorage find(ServerLevel level, BlockPos pos, Direction direction) {
-        var blockEntity = level.getBlockEntity(pos);
-        if (blockEntity == null) return null;
-        
-        LazyOptional<IEnergyStorage> capability = blockEntity.getCapability(
-            ForgeCapabilities.ENERGY, direction);
-        
-        return capability.map(ForgeEnergyWrapper::new).orElse(null);
-    }
+    /**
+     * Singleton instance that implements our SidedStorage interface
+     */
+    public static final EnergyStorage.SidedStorage INSTANCE = new EnergyStorage.SidedStorage() {
+        @Override
+        public EnergyStorage find(ServerLevel level, BlockPos pos, Direction direction) {
+            var blockEntity = level.getBlockEntity(pos);
+            System.out.println("[EnergyStorage] Checking pos=" + pos + " direction=" + direction + " blockEntity=" + (blockEntity != null ? blockEntity.getClass().getSimpleName() : "null"));
+            
+            if (blockEntity == null) {
+                System.out.println("[EnergyStorage] No blockEntity found, returning null");
+                return null;
+            }
+            
+            LazyOptional<IEnergyStorage> capability = blockEntity.getCapability(
+                ForgeCapabilities.ENERGY, direction);
+            
+            boolean hasCapability = capability.isPresent();
+            System.out.println("[EnergyStorage] Energy capability present: " + hasCapability);
+            
+            if (hasCapability) {
+                IEnergyStorage handler = capability.orElse(null);
+                System.out.println("[EnergyStorage] Found IEnergyStorage: " + handler.getClass().getSimpleName() + " with " + handler.getEnergyStored() + "/" + handler.getMaxEnergyStored() + " RF");
+                return capability.map(ForgeEnergyWrapper::new).orElse(null);
+            } else {
+                System.out.println("[EnergyStorage] No energy capability, returning null");
+                return null;
+            }
+        }
+    };
     
     public static long getAmount(Object energyStorage) {
         if (energyStorage instanceof ForgeEnergyWrapper wrapper) {
@@ -45,9 +66,9 @@ public class EnergyStorageImpl {
     }
     
     /**
-     * Wrapper class that implements our EnergyStorage interface using Forge's IEnergyStorage.
+     * Wrapper class that extends our EnergyStorage abstract class using Forge's IEnergyStorage.
      */
-    public static class ForgeEnergyWrapper implements EnergyStorage {
+    public static class ForgeEnergyWrapper extends EnergyStorage {
         private final IEnergyStorage forgeStorage;
         
         public ForgeEnergyWrapper(IEnergyStorage forgeStorage) {

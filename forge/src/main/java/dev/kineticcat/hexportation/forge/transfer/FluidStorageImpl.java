@@ -3,6 +3,7 @@ package dev.kineticcat.hexportation.forge.transfer;
 import dev.kineticcat.hexportation.api.transfer.Storage;
 import dev.kineticcat.hexportation.api.transfer.StorageView;
 import dev.kineticcat.hexportation.api.transfer.FluidVariant;
+import dev.kineticcat.hexportation.api.transfer.FluidStorage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -21,15 +22,40 @@ import java.util.List;
  */
 public class FluidStorageImpl {
     
-    public static Storage<FluidVariant> find(ServerLevel level, BlockPos pos, Direction direction) {
-        var blockEntity = level.getBlockEntity(pos);
-        if (blockEntity == null) return null;
-        
-        LazyOptional<IFluidHandler> capability = blockEntity.getCapability(
-            ForgeCapabilities.FLUID_HANDLER, direction);
-        
-        return capability.map(ForgeFluidWrapper::new).orElse(null);
-    }
+    /**
+     * Singleton instance that implements our SidedStorage interface
+     */
+    public static final FluidStorage.SidedStorage INSTANCE = new FluidStorage.SidedStorage() {
+        @Override
+        public Storage<FluidVariant> find(ServerLevel level, BlockPos pos, Direction direction) {
+            var blockEntity = level.getBlockEntity(pos);
+            System.out.println("[FluidStorage] Checking pos=" + pos + " direction=" + direction + " blockEntity=" + (blockEntity != null ? blockEntity.getClass().getSimpleName() : "null"));
+            
+            if (blockEntity == null) {
+                System.out.println("[FluidStorage] No blockEntity found, returning null");
+                return null;
+            }
+            
+            LazyOptional<IFluidHandler> capability = blockEntity.getCapability(
+                ForgeCapabilities.FLUID_HANDLER, direction);
+            
+            boolean hasCapability = capability.isPresent();
+            System.out.println("[FluidStorage] Fluid capability present: " + hasCapability);
+            
+            if (hasCapability) {
+                IFluidHandler handler = capability.orElse(null);
+                System.out.println("[FluidStorage] Found IFluidHandler: " + handler.getClass().getSimpleName() + " with " + handler.getTanks() + " tanks");
+                for (int i = 0; i < handler.getTanks(); i++) {
+                    var stack = handler.getFluidInTank(i);
+                    System.out.println("[FluidStorage] Tank " + i + ": " + stack.getAmount() + "mB of " + (stack.isEmpty() ? "air" : stack.getFluid().toString()));
+                }
+                return capability.map(ForgeFluidWrapper::new).orElse(null);
+            } else {
+                System.out.println("[FluidStorage] No fluid capability, returning null");
+                return null;
+            }
+        }
+    };
     
     /**
      * Wrapper class that implements our Storage<FluidVariant> interface using Forge's IFluidHandler.

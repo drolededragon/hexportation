@@ -3,6 +3,7 @@ package dev.kineticcat.hexportation.forge.transfer;
 import dev.kineticcat.hexportation.api.transfer.Storage;
 import dev.kineticcat.hexportation.api.transfer.StorageView;
 import dev.kineticcat.hexportation.api.transfer.ItemVariant;
+import dev.kineticcat.hexportation.api.transfer.ItemStorage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -21,15 +22,36 @@ import java.util.List;
  */
 public class ItemStorageImpl {
     
-    public static Storage<ItemVariant> find(ServerLevel level, BlockPos pos, Direction direction) {
-        var blockEntity = level.getBlockEntity(pos);
-        if (blockEntity == null) return null;
-        
-        LazyOptional<IItemHandler> capability = blockEntity.getCapability(
-            ForgeCapabilities.ITEM_HANDLER, direction);
-        
-        return capability.map(ForgeItemWrapper::new).orElse(null);
-    }
+    /**
+     * Singleton instance that implements our SidedStorage interface
+     */
+    public static final ItemStorage.SidedStorage INSTANCE = new ItemStorage.SidedStorage() {
+        @Override
+        public Storage<ItemVariant> find(ServerLevel level, BlockPos pos, Direction direction) {
+            var blockEntity = level.getBlockEntity(pos);
+            System.out.println("[ItemStorage] Checking pos=" + pos + " direction=" + direction + " blockEntity=" + (blockEntity != null ? blockEntity.getClass().getSimpleName() : "null"));
+            
+            if (blockEntity == null) {
+                System.out.println("[ItemStorage] No blockEntity found, returning null");
+                return null;
+            }
+            
+            LazyOptional<IItemHandler> capability = blockEntity.getCapability(
+                ForgeCapabilities.ITEM_HANDLER, direction);
+            
+            boolean hasCapability = capability.isPresent();
+            System.out.println("[ItemStorage] Item capability present: " + hasCapability);
+            
+            if (hasCapability) {
+                IItemHandler handler = capability.orElse(null);
+                System.out.println("[ItemStorage] Found IItemHandler: " + handler.getClass().getSimpleName() + " with " + handler.getSlots() + " slots");
+                return capability.map(ForgeItemWrapper::new).orElse(null);
+            } else {
+                System.out.println("[ItemStorage] No item capability, returning null");
+                return null;
+            }
+        }
+    };
     
     /**
      * Wrapper class that implements our Storage<ItemVariant> interface using Forge's IItemHandler.

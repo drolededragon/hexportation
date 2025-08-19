@@ -1,6 +1,7 @@
 package dev.kineticcat.hexportation.forge.transfer;
 
 import dev.kineticcat.hexportation.api.transfer.EnergyStorage;
+import dev.kineticcat.hexportation.api.transfer.EnergyStorageUtil;
 import dev.kineticcat.hexportation.api.transfer.Transaction;
 
 /**
@@ -8,14 +9,17 @@ import dev.kineticcat.hexportation.api.transfer.Transaction;
  * Since Forge doesn't have Team Reborn Energy's EnergyStorageUtil,
  * we implement the move operation manually using ForgeEnergyWrapper.
  */
-public class EnergyStorageUtilImpl {
+public class EnergyStorageUtilImpl extends EnergyStorageUtil.Implementation {
+    
+    public static final EnergyStorageUtilImpl INSTANCE = new EnergyStorageUtilImpl();
     
     /**
      * Implementation of EnergyStorageUtil.move() for Forge.
      * Simulates the behavior of Team Reborn Energy's EnergyStorageUtil.move()
      * using Forge's IEnergyStorage capabilities.
      */
-    public static long move(Object source, Object sink, long maxAmount, Object transaction) {
+    @Override
+    public long move(Object source, Object sink, long maxAmount, Object transaction) {
         // Validate transaction state
         if (transaction instanceof TransactionImpl tx && !tx.isValid()) {
             return 0; // Don't operate on aborted/closed transactions

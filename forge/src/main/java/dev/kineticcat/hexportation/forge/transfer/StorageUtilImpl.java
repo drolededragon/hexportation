@@ -3,6 +3,7 @@ package dev.kineticcat.hexportation.forge.transfer;
 import dev.kineticcat.hexportation.api.transfer.Storage;
 import dev.kineticcat.hexportation.api.transfer.StorageView;
 import dev.kineticcat.hexportation.api.transfer.Transaction;
+import dev.kineticcat.hexportation.api.transfer.StorageUtil;
 
 import java.util.function.Predicate;
 
@@ -11,14 +12,20 @@ import java.util.function.Predicate;
  * Since Forge doesn't have an equivalent to Fabric's StorageUtil.move(),
  * we implement the same algorithm manually using simulation-first approach.
  */
-public class StorageUtilImpl {
+public class StorageUtilImpl extends StorageUtil.StorageUtilImpl {
+    
+    /**
+     * Singleton instance for injection
+     */
+    public static final StorageUtilImpl INSTANCE = new StorageUtilImpl();
     
     /**
      * Implementation of StorageUtil.move() for Forge.
      * Reproduces the exact same behavior as Fabric's StorageUtil.move() 
      * using our ForgeItemWrapper/ForgeFluidWrapper implementations.
      */
-    public static <T> long move(Storage<T> source, Storage<T> sink, 
+    @Override
+    public <T> long move(Storage<T> source, Storage<T> sink, 
                                Predicate<T> filter, long maxAmount, Transaction transaction) {
         
         // Validate transaction state
@@ -92,7 +99,8 @@ public class StorageUtilImpl {
      * Implementation of StorageUtil.simulateExtract() for Forge.
      * Simply delegates to the StorageView's simulateExtract method.
      */
-    public static <T> long simulateExtract(StorageView<T> storageView, T resource, long maxAmount, Transaction transaction) {
+    @Override
+    public <T> long simulateExtract(StorageView<T> storageView, T resource, long maxAmount, Transaction transaction) {
         // Validate transaction state
         if (transaction instanceof TransactionImpl tx && !tx.isValid()) {
             return 0; // Don't operate on aborted/closed transactions

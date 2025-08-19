@@ -1,18 +1,22 @@
 package dev.kineticcat.hexportation.fabric.transfer;
 
+import dev.kineticcat.hexportation.api.transfer.EnergyStorageUtil;
 import team.reborn.energy.api.EnergyStorage;
 
 /**
  * Fabric implementation of our cross-platform EnergyStorageUtil.
  * Delegates to Team Reborn Energy's actual EnergyStorageUtil.move() method.
  */
-public class EnergyStorageUtilImpl {
+public class EnergyStorageUtilImpl extends EnergyStorageUtil.Implementation {
+    
+    public static final EnergyStorageUtilImpl INSTANCE = new EnergyStorageUtilImpl();
     
     /**
      * Implementation of EnergyStorageUtil.move() that delegates to Team Reborn Energy's util.
      * This preserves the exact same behavior as the original code.
      */
-    public static long move(Object source, Object sink, long maxAmount, Object transaction) {
+    @Override
+    public long move(Object source, Object sink, long maxAmount, Object transaction) {
         // Cast back to Team Reborn Energy types and delegate to the real EnergyStorageUtil
         return team.reborn.energy.api.EnergyStorageUtil.move(
             (EnergyStorage) source, 
