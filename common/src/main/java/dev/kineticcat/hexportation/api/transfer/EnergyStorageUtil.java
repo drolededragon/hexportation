@@ -1,7 +1,5 @@
 package dev.kineticcat.hexportation.api.transfer;
 
-import dev.architectury.injectables.annotations.ExpectPlatform;
-
 /**
  * Cross-platform replacement for Team Reborn Energy's EnergyStorageUtil.
  * Provides identical method signatures so existing code needs zero changes.
@@ -9,6 +7,8 @@ import dev.architectury.injectables.annotations.ExpectPlatform;
  * to dev.kineticcat.hexportation.api.transfer.EnergyStorageUtil
  */
 public class EnergyStorageUtil {
+    
+    private static Implementation implementation;
     
     /**
      * Move energy from source to sink storage.
@@ -20,8 +20,19 @@ public class EnergyStorageUtil {
      * @param transaction Transaction object (usually null for auto-commit)
      * @return Amount actually moved
      */
-    @ExpectPlatform
     public static long move(Object source, Object sink, long maxAmount, Object transaction) {
-        throw new AssertionError("Platform implementation required");
+        if (implementation == null) {
+            throw new IllegalStateException("EnergyStorageUtil not initialized - platform implementation missing");
+        }
+        return implementation.move(source, sink, maxAmount, transaction);
+    }
+    
+    public static abstract class Implementation {
+        public abstract long move(Object source, Object sink, long maxAmount, Object transaction);
+    }
+    
+    // Platform modules will call this to inject their implementation
+    public static void setImplementation(Implementation impl) {
+        implementation = impl;
     }
 }

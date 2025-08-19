@@ -1,6 +1,5 @@
 package dev.kineticcat.hexportation.api.transfer;
 
-import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -12,12 +11,14 @@ import net.minecraft.server.level.ServerLevel;
  * to dev.kineticcat.hexportation.api.transfer.FluidStorage
  */
 public class FluidStorage {
-    public static final SidedStorage SIDED = new SidedStorage();
+    public static SidedStorage SIDED;
     
-    public static class SidedStorage {
-        @ExpectPlatform
-        public Storage<FluidVariant> find(ServerLevel level, BlockPos pos, Direction direction) {
-            throw new AssertionError("Platform implementation required");
-        }
+    public static abstract class SidedStorage {
+        public abstract Storage<FluidVariant> find(ServerLevel level, BlockPos pos, Direction direction);
+    }
+    
+    // Platform modules will call this to inject their implementation
+    public static void setSidedStorage(SidedStorage implementation) {
+        SIDED = implementation;
     }
 }

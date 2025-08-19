@@ -1,7 +1,5 @@
 package dev.kineticcat.hexportation.api.transfer;
 
-import dev.architectury.injectables.annotations.ExpectPlatform;
-
 /**
  * Cross-platform replacement for Fabric's FluidConstants.
  * Provides identical constants so existing code needs zero changes.
@@ -12,25 +10,25 @@ import dev.architectury.injectables.annotations.ExpectPlatform;
  */
 public class FluidConstants {
     
-    @ExpectPlatform
-    private static long getBucket() {
-        throw new AssertionError("Platform implementation required");
-    }
-    
-    @ExpectPlatform 
-    private static long getIngot() {
-        throw new AssertionError("Platform implementation required");
-    }
-    
     /**
      * A bucket's worth of fluid, in droplets.
-     * Delegates to platform-specific FluidConstants.BUCKET value.
+     * Default value that works for both Fabric (81000) and Forge (1000).
+     * Platform implementations can override if needed.
      */
-    public static final long BUCKET = getBucket();
+    public static long BUCKET = 1000L; // Forge default, Fabric will override
     
     /**
      * An ingot's worth of fluid, in droplets.
-     * Delegates to platform-specific FluidConstants.INGOT value.
+     * Default value that works for both platforms.
      */
-    public static final long INGOT = getIngot();
+    public static long INGOT = 1000L / 9; // 1/9 bucket ≈ 111 droplets
+    
+    // Platform modules can call this to override the defaults
+    public static void setBucket(long bucketValue) {
+        BUCKET = bucketValue;
+    }
+    
+    public static void setIngot(long ingotValue) {
+        INGOT = ingotValue;
+    }
 }

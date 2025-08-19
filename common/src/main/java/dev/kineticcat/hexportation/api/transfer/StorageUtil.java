@@ -1,7 +1,5 @@
 package dev.kineticcat.hexportation.api.transfer;
 
-import dev.architectury.injectables.annotations.ExpectPlatform;
-
 /**
  * Cross-platform replacement for Fabric's StorageUtil.
  * Provides identical method signatures so existing code needs zero changes.
@@ -9,6 +7,7 @@ import dev.architectury.injectables.annotations.ExpectPlatform;
  * to dev.kineticcat.hexportation.api.transfer.StorageUtil
  */
 public class StorageUtil {
+    private static StorageUtilImpl implementation;
     
     /**
      * Move resources from source to sink storage.
@@ -21,18 +20,28 @@ public class StorageUtil {
      * @param transaction Transaction object (usually null for auto-commit)
      * @return Amount actually moved
      */
-    @ExpectPlatform
     public static <T> long move(Storage<T> source, Storage<T> sink, 
                                java.util.function.Predicate<T> filter, long maxAmount, Transaction transaction) {
-        throw new AssertionError("Platform implementation required");
+        return implementation.move(source, sink, filter, maxAmount, transaction);
     }
     
     /**
      * Simulate extraction from a storage view.
      * Exact same signature as Fabric's StorageUtil.simulateExtract()
      */
-    @ExpectPlatform
     public static <T> long simulateExtract(StorageView<T> storageView, T resource, long maxAmount, Transaction transaction) {
-        throw new AssertionError("Platform implementation required");
+        return implementation.simulateExtract(storageView, resource, maxAmount, transaction);
+    }
+    
+    // Platform modules will call this to inject their implementation
+    public static void setImplementation(StorageUtilImpl impl) {
+        implementation = impl;
+    }
+    
+    public static abstract class StorageUtilImpl {
+        public abstract <T> long move(Storage<T> source, Storage<T> sink, 
+                                     java.util.function.Predicate<T> filter, long maxAmount, Transaction transaction);
+        
+        public abstract <T> long simulateExtract(StorageView<T> storageView, T resource, long maxAmount, Transaction transaction);
     }
 }
