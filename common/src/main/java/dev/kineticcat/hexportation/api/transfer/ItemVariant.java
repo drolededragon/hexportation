@@ -1,24 +1,24 @@
 package dev.kineticcat.hexportation.api.transfer;
 
-import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
 /**
- * Cross-platform replacement for Fabric's ItemVariant.
+ * Cross-platform replacement for Fabric's ItemVariant using singleton injection pattern.
  * Provides identical API so existing code needs zero changes.
  * Just the import changes from net.fabricmc.fabric.api.transfer.v1.item.ItemVariant
  * to dev.kineticcat.hexportation.api.transfer.ItemVariant
  */
-public interface ItemVariant {
+public abstract class ItemVariant {
+    
+    private static Implementation implementation;
     
     /**
      * Create an ItemVariant from an Item.
      * This method signature matches Fabric's ItemVariant.of(Item)
      */
-    @ExpectPlatform
-    static ItemVariant of(Item item) {
-        throw new AssertionError("Platform implementation required");
+    public static ItemVariant of(Item item) {
+        return implementation.of(item);
     }
     
     /**
@@ -26,23 +26,38 @@ public interface ItemVariant {
      * This method signature matches Fabric's ItemVariant.blank()
      * Used for representing empty slots and comparisons.
      */
-    @ExpectPlatform
-    static ItemVariant blank() {
-        throw new AssertionError("Platform implementation required");
+    public static ItemVariant blank() {
+        return implementation.blank();
     }
     
     /**
      * Get the item from this variant.
      */
-    Item getItem();
+    public abstract Item getItem();
     
     /**
      * Convert this variant to an ItemStack.
      */
-    ItemStack toStack();
+    public abstract ItemStack toStack();
     
     /**
      * Convert this variant to an ItemStack with a specific count.
      */
-    ItemStack toStack(int count);
+    public abstract ItemStack toStack(int count);
+    
+    /**
+     * Platform-specific implementation interface.
+     */
+    public static abstract class Implementation {
+        public abstract ItemVariant of(Item item);
+        public abstract ItemVariant blank();
+    }
+    
+    /**
+     * Set the platform-specific implementation.
+     * Called by platform modules during initialization.
+     */
+    public static void setImplementation(Implementation impl) {
+        implementation = impl;
+    }
 }

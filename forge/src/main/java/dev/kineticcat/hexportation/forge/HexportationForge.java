@@ -10,11 +10,19 @@ import dev.kineticcat.hexportation.api.transfer.EnergyStorage;
 import dev.kineticcat.hexportation.api.transfer.StorageUtil;
 import dev.kineticcat.hexportation.api.transfer.FluidConstants;
 import dev.kineticcat.hexportation.api.transfer.EnergyStorageUtil;
+import dev.kineticcat.hexportation.api.transfer.FluidVariant;
+import dev.kineticcat.hexportation.api.transfer.ItemVariant;
+import dev.kineticcat.hexportation.api.transfer.Transaction;
+import dev.kineticcat.hexportation.api.transfer.FluidVariantAttributes;
 import dev.kineticcat.hexportation.forge.transfer.ItemStorageImpl;
 import dev.kineticcat.hexportation.forge.transfer.FluidStorageImpl;
 import dev.kineticcat.hexportation.forge.transfer.EnergyStorageImpl;
 import dev.kineticcat.hexportation.forge.transfer.StorageUtilImpl;
 import dev.kineticcat.hexportation.forge.transfer.EnergyStorageUtilImpl;
+import dev.kineticcat.hexportation.forge.transfer.FluidVariantImpl;
+import dev.kineticcat.hexportation.forge.transfer.ItemVariantImpl;
+import dev.kineticcat.hexportation.forge.transfer.TransactionImpl;
+import dev.kineticcat.hexportation.forge.transfer.FluidVariantAttributesImpl;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -35,6 +43,14 @@ public class HexportationForge {
         EnergyStorage.setSidedStorage(EnergyStorageImpl.INSTANCE);
         StorageUtil.setImplementation(StorageUtilImpl.INSTANCE);
         EnergyStorageUtil.setImplementation(EnergyStorageUtilImpl.INSTANCE);
+        
+        // Initialize Variant implementations
+        FluidVariant.setImplementation(FluidVariantImpl.INSTANCE);
+        ItemVariant.setImplementation(ItemVariantImpl.INSTANCE);
+        
+        // Initialize Transaction and other implementations
+        Transaction.setImplementation(TransactionImpl.INSTANCE);
+        FluidVariantAttributes.setImplementation(FluidVariantAttributesImpl.INSTANCE);
         
         // Submit our event bus to let architectury register our content on the right time
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();

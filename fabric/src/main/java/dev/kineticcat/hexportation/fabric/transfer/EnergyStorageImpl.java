@@ -17,8 +17,39 @@ public class EnergyStorageImpl {
     public static final EnergyStorage.SidedStorage INSTANCE = new EnergyStorage.SidedStorage() {
         @Override
         public EnergyStorage find(ServerLevel level, BlockPos pos, Direction direction) {
-            // Cast the Team Reborn EnergyStorage to our interface - this works because both are interfaces
-            return (EnergyStorage) team.reborn.energy.api.EnergyStorage.SIDED.find(level, pos, direction);
+            team.reborn.energy.api.EnergyStorage teamRebornStorage = 
+                team.reborn.energy.api.EnergyStorage.SIDED.find(level, pos, direction);
+            
+            if (teamRebornStorage == null) {
+                return null;
+            }
+            
+            return new FabricEnergyWrapper(teamRebornStorage);
         }
     };
+    
+    /**
+     * Wrapper class that extends our EnergyStorage abstract class using Team Reborn Energy.
+     */
+    public static class FabricEnergyWrapper extends EnergyStorage {
+        private final team.reborn.energy.api.EnergyStorage teamRebornStorage;
+        
+        public FabricEnergyWrapper(team.reborn.energy.api.EnergyStorage teamRebornStorage) {
+            this.teamRebornStorage = teamRebornStorage;
+        }
+        
+        @Override
+        public long getAmount() {
+            return teamRebornStorage.getAmount();
+        }
+        
+        @Override
+        public long getCapacity() {
+            return teamRebornStorage.getCapacity();
+        }
+        
+        public team.reborn.energy.api.EnergyStorage getTeamRebornStorage() {
+            return teamRebornStorage;
+        }
+    }
 }

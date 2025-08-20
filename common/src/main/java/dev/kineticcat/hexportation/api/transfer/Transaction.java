@@ -1,22 +1,21 @@
 package dev.kineticcat.hexportation.api.transfer;
 
-import dev.architectury.injectables.annotations.ExpectPlatform;
-
 /**
- * Cross-platform replacement for Fabric's Transaction.
+ * Cross-platform replacement for Fabric's Transaction using singleton injection pattern.
  * Provides identical API so existing code needs zero changes.
  * Just the import changes from net.fabricmc.fabric.api.transfer.v1.transaction.Transaction
  * to dev.kineticcat.hexportation.api.transfer.Transaction
  */
 public abstract class Transaction implements AutoCloseable {
     
+    private static Implementation implementation;
+    
     /**
      * Open an outer transaction.
      * This method signature matches Fabric's Transaction.openOuter()
      */
-    @ExpectPlatform
     public static Transaction openOuter() {
-        throw new AssertionError("Platform implementation required");
+        return implementation.openOuter();
     }
     
     /**
@@ -39,4 +38,19 @@ public abstract class Transaction implements AutoCloseable {
     
     @Override
     public abstract void close();
+    
+    /**
+     * Platform-specific implementation interface.
+     */
+    public static abstract class Implementation {
+        public abstract Transaction openOuter();
+    }
+    
+    /**
+     * Set the platform-specific implementation.
+     * Called by platform modules during initialization.
+     */
+    public static void setImplementation(Implementation impl) {
+        implementation = impl;
+    }
 }

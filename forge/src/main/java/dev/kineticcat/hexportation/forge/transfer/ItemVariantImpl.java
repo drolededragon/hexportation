@@ -5,23 +5,26 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
 /**
- * Forge implementation that wraps ItemStack as ItemVariant.
- * Provides identical API to Fabric's ItemVariant through wrapper pattern.
+ * Forge implementation using singleton injection pattern.
  */
-public class ItemVariantImpl {
+public class ItemVariantImpl extends ItemVariant.Implementation {
     
-    public static ItemVariant of(Item item) {
+    public static final ItemVariantImpl INSTANCE = new ItemVariantImpl();
+    
+    @Override
+    public ItemVariant of(Item item) {
         return new ItemStackWrapper(new ItemStack(item));
     }
     
-    public static ItemVariant blank() {
+    @Override
+    public ItemVariant blank() {
         return new ItemStackWrapper(ItemStack.EMPTY);
     }
     
     /**
-     * Wrapper class that implements our ItemVariant interface using Forge's ItemStack.
+     * Wrapper class that extends our ItemVariant abstract class using Forge's ItemStack.
      */
-    public static class ItemStackWrapper implements ItemVariant {
+    public static class ItemStackWrapper extends ItemVariant {
         private final ItemStack itemStack;
         
         public ItemStackWrapper(ItemStack itemStack) {

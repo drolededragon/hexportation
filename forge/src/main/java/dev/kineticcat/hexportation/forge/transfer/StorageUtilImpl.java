@@ -29,7 +29,7 @@ public class StorageUtilImpl extends StorageUtil.StorageUtilImpl {
                                Predicate<T> filter, long maxAmount, Transaction transaction) {
         
         // Validate transaction state
-        if (transaction instanceof TransactionImpl tx && !tx.isValid()) {
+        if (transaction instanceof TransactionImpl.ForgeTransactionWrapper tx && !tx.isValid()) {
             return 0; // Don't operate on aborted/closed transactions
         }
         
@@ -102,7 +102,7 @@ public class StorageUtilImpl extends StorageUtil.StorageUtilImpl {
     @Override
     public <T> long simulateExtract(StorageView<T> storageView, T resource, long maxAmount, Transaction transaction) {
         // Validate transaction state
-        if (transaction instanceof TransactionImpl tx && !tx.isValid()) {
+        if (transaction instanceof TransactionImpl.ForgeTransactionWrapper tx && !tx.isValid()) {
             return 0; // Don't operate on aborted/closed transactions
         }
         

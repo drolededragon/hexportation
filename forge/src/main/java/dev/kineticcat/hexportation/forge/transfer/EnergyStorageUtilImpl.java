@@ -21,7 +21,7 @@ public class EnergyStorageUtilImpl extends EnergyStorageUtil.Implementation {
     @Override
     public long move(Object source, Object sink, long maxAmount, Object transaction) {
         // Validate transaction state
-        if (transaction instanceof TransactionImpl tx && !tx.isValid()) {
+        if (transaction instanceof TransactionImpl.ForgeTransactionWrapper tx && !tx.isValid()) {
             return 0; // Don't operate on aborted/closed transactions
         }
         

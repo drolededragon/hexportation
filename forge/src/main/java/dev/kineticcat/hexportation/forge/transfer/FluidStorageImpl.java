@@ -160,7 +160,7 @@ public class FluidStorageImpl {
         @Override
         public FluidVariant getResource() {
             FluidStack stack = handler.getFluidInTank(tank);
-            return FluidVariantImpl.fromFluidStack(stack);
+            return FluidVariant.of(stack.getFluid(), stack.getTag());
         }
         
         @Override
@@ -171,6 +171,11 @@ public class FluidStorageImpl {
         @Override
         public long getCapacity() {
             return handler.getTankCapacity(tank);
+        }
+        
+        @Override
+        public boolean isBlank() {
+            return handler.getFluidInTank(tank).isEmpty();
         }
         
         @Override

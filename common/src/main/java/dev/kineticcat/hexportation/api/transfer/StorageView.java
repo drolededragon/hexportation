@@ -22,6 +22,11 @@ public interface StorageView<T> {
     long getCapacity();
     
     /**
+     * Check if this view is blank (empty).
+     */
+    boolean isBlank();
+    
+    /**
      * Simulate extracting from this view.
      */
     long simulateExtract(T resource, long maxAmount, Object transaction);

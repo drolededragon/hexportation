@@ -105,7 +105,7 @@ public class ItemStorageImpl {
             // Try to extract from any slot containing this resource
             for (int slot = 0; slot < forgeHandler.getSlots(); slot++) {
                 ItemStack slotStack = forgeHandler.getStackInSlot(slot);
-                if (!slotStack.isEmpty() && ItemVariantImpl.of(slotStack.getItem()).equals(resource)) {
+                if (!slotStack.isEmpty() && ItemVariant.of(slotStack.getItem()).equals(resource)) {
                     ItemStack extracted = forgeHandler.extractItem(slot, (int) Math.min(maxAmount, Integer.MAX_VALUE), false);
                     return extracted.getCount();
                 }
@@ -118,7 +118,7 @@ public class ItemStorageImpl {
             // Try to simulate extraction from any slot containing this resource
             for (int slot = 0; slot < forgeHandler.getSlots(); slot++) {
                 ItemStack slotStack = forgeHandler.getStackInSlot(slot);
-                if (!slotStack.isEmpty() && ItemVariantImpl.of(slotStack.getItem()).equals(resource)) {
+                if (!slotStack.isEmpty() && ItemVariant.of(slotStack.getItem()).equals(resource)) {
                     ItemStack extracted = forgeHandler.extractItem(slot, (int) Math.min(maxAmount, Integer.MAX_VALUE), true); // simulate=true
                     return extracted.getCount();
                 }
@@ -169,9 +169,9 @@ public class ItemStorageImpl {
         public ItemVariant getResource() {
             ItemStack stack = handler.getStackInSlot(slot);
             if (stack.isEmpty()) {
-                return ItemVariantImpl.blank(); // Empty variant for empty slots
+                return ItemVariant.blank(); // Empty variant for empty slots
             }
-            return ItemVariantImpl.of(stack.getItem());
+            return ItemVariant.of(stack.getItem());
         }
         
         @Override
@@ -187,9 +187,14 @@ public class ItemStorageImpl {
         }
         
         @Override
+        public boolean isBlank() {
+            return handler.getStackInSlot(slot).isEmpty();
+        }
+        
+        @Override
         public long simulateExtract(ItemVariant resource, long maxAmount, Object transaction) {
             ItemStack slotStack = handler.getStackInSlot(slot);
-            if (slotStack.isEmpty() || !ItemVariantImpl.of(slotStack.getItem()).equals(resource)) {
+            if (slotStack.isEmpty() || !ItemVariant.of(slotStack.getItem()).equals(resource)) {
                 return 0;
             }
             
@@ -200,7 +205,7 @@ public class ItemStorageImpl {
         @Override
         public long extract(ItemVariant resource, long maxAmount, Object transaction) {
             ItemStack slotStack = handler.getStackInSlot(slot);
-            if (slotStack.isEmpty() || !ItemVariantImpl.of(slotStack.getItem()).equals(resource)) {
+            if (slotStack.isEmpty() || !ItemVariant.of(slotStack.getItem()).equals(resource)) {
                 return 0;
             }
             

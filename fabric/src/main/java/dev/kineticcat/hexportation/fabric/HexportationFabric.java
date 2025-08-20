@@ -9,11 +9,19 @@ import dev.kineticcat.hexportation.api.transfer.EnergyStorage;
 import dev.kineticcat.hexportation.api.transfer.StorageUtil;
 import dev.kineticcat.hexportation.api.transfer.FluidConstants;
 import dev.kineticcat.hexportation.api.transfer.EnergyStorageUtil;
+import dev.kineticcat.hexportation.api.transfer.FluidVariant;
+import dev.kineticcat.hexportation.api.transfer.ItemVariant;
+import dev.kineticcat.hexportation.api.transfer.Transaction;
+import dev.kineticcat.hexportation.api.transfer.FluidVariantAttributes;
 import dev.kineticcat.hexportation.fabric.transfer.ItemStorageImpl;
 import dev.kineticcat.hexportation.fabric.transfer.FluidStorageImpl;
 import dev.kineticcat.hexportation.fabric.transfer.EnergyStorageImpl;
 import dev.kineticcat.hexportation.fabric.transfer.StorageUtilImpl;
 import dev.kineticcat.hexportation.fabric.transfer.EnergyStorageUtilImpl;
+import dev.kineticcat.hexportation.fabric.transfer.FluidVariantImpl;
+import dev.kineticcat.hexportation.fabric.transfer.ItemVariantImpl;
+import dev.kineticcat.hexportation.fabric.transfer.TransactionImpl;
+import dev.kineticcat.hexportation.fabric.transfer.FluidVariantAttributesImpl;
 import net.fabricmc.api.ModInitializer;
 
 /**
@@ -35,6 +43,14 @@ public class HexportationFabric implements ModInitializer {
         EnergyStorage.setSidedStorage(EnergyStorageImpl.INSTANCE);
         StorageUtil.setImplementation(StorageUtilImpl.INSTANCE);
         EnergyStorageUtil.setImplementation(EnergyStorageUtilImpl.INSTANCE);
+        
+        // Initialize Variant implementations
+        FluidVariant.setImplementation(FluidVariantImpl.INSTANCE);
+        ItemVariant.setImplementation(ItemVariantImpl.INSTANCE);
+        
+        // Initialize Transaction and other implementations
+        Transaction.setImplementation(TransactionImpl.INSTANCE);
+        FluidVariantAttributes.setImplementation(FluidVariantAttributesImpl.INSTANCE);
 
         Hexportation.init();
         HexportationPatternRegistry.init();

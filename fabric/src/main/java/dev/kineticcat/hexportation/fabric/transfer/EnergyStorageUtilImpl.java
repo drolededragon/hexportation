@@ -17,10 +17,14 @@ public class EnergyStorageUtilImpl extends EnergyStorageUtil.Implementation {
      */
     @Override
     public long move(Object source, Object sink, long maxAmount, Object transaction) {
+        // Extract Team Reborn Energy objects from our wrappers
+        EnergyStorageImpl.FabricEnergyWrapper sourceWrapper = (EnergyStorageImpl.FabricEnergyWrapper) source;
+        EnergyStorageImpl.FabricEnergyWrapper sinkWrapper = (EnergyStorageImpl.FabricEnergyWrapper) sink;
+        
         // Cast back to Team Reborn Energy types and delegate to the real EnergyStorageUtil
         return team.reborn.energy.api.EnergyStorageUtil.move(
-            (EnergyStorage) source, 
-            (EnergyStorage) sink, 
+            sourceWrapper.getTeamRebornStorage(), 
+            sinkWrapper.getTeamRebornStorage(), 
             maxAmount,
             (net.fabricmc.fabric.api.transfer.v1.transaction.Transaction) transaction
         );

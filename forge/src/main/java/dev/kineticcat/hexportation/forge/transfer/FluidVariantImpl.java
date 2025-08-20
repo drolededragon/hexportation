@@ -6,16 +6,19 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
 /**
- * Forge implementation that wraps FluidStack as FluidVariant.
- * Provides identical API to Fabric's FluidVariant through wrapper pattern.
+ * Forge implementation using singleton injection pattern.
  */
-public class FluidVariantImpl {
+public class FluidVariantImpl extends FluidVariant.Implementation {
     
-    public static FluidVariant of(Fluid fluid) {
+    public static final FluidVariantImpl INSTANCE = new FluidVariantImpl();
+    
+    @Override
+    public FluidVariant of(Fluid fluid) {
         return new FluidStackWrapper(new FluidStack(fluid, 1000)); // 1000 = 1 bucket in Forge
     }
     
-    public static FluidVariant of(Fluid fluid, CompoundTag nbt) {
+    @Override
+    public FluidVariant of(Fluid fluid, CompoundTag nbt) {
         FluidStack fluidStack = new FluidStack(fluid, 1000);
         if (nbt != null) {
             fluidStack.setTag(nbt);
@@ -28,9 +31,9 @@ public class FluidVariantImpl {
     }
     
     /**
-     * Wrapper class that implements our FluidVariant interface using Forge's FluidStack.
+     * Wrapper class that extends our FluidVariant abstract class using Forge's FluidStack.
      */
-    public static class FluidStackWrapper implements FluidVariant {
+    public static class FluidStackWrapper extends FluidVariant {
         private final FluidStack fluidStack;
         
         public FluidStackWrapper(FluidStack fluidStack) {
