@@ -128,8 +128,8 @@ public class StorageViewIota extends Iota {
             Long cap = view.capacity;
             // convert droplets to millibuckets
             if (view.mode == Storage.Modes.FLUID) {
-                amt = amt/ FluidConstants.BUCKET * 1000;
-                cap = cap/ FluidConstants.BUCKET * 1000;
+                amt = amt * 1000 / FluidConstants.BUCKET;
+                cap = cap * 1000 / FluidConstants.BUCKET;
             }
             out.append(" ").append(amt.toString()).append("/").append(cap.toString());
             switch (view.mode) {
