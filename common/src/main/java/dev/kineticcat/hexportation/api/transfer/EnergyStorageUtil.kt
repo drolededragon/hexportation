@@ -1,4 +1,4 @@
-package dev.kineticcat.hexportation.api.transfer;
+package dev.kineticcat.hexportation.api.transfer
 
 /**
  * Cross-platform replacement for Team Reborn Energy's EnergyStorageUtil.
@@ -6,9 +6,9 @@ package dev.kineticcat.hexportation.api.transfer;
  * Just the import changes from team.reborn.energy.api.EnergyStorageUtil
  * to dev.kineticcat.hexportation.api.transfer.EnergyStorageUtil
  */
-public class EnergyStorageUtil {
+object EnergyStorageUtil {
     
-    private static Implementation implementation;
+    private var implementation: Implementation? = null
     
     /**
      * Move energy from source to sink storage.
@@ -20,19 +20,19 @@ public class EnergyStorageUtil {
      * @param transaction Transaction object (usually null for auto-commit)
      * @return Amount actually moved
      */
-    public static long move(Object source, Object sink, long maxAmount, Object transaction) {
-        if (implementation == null) {
-            throw new IllegalStateException("EnergyStorageUtil not initialized - platform implementation missing");
-        }
-        return implementation.move(source, sink, maxAmount, transaction);
+    @JvmStatic
+    fun move(source: Any?, sink: Any?, maxAmount: Long, transaction: Any?): Long {
+        return implementation?.move(source, sink, maxAmount, transaction) 
+            ?: throw IllegalStateException("EnergyStorageUtil not initialized - platform implementation missing")
     }
     
-    public static abstract class Implementation {
-        public abstract long move(Object source, Object sink, long maxAmount, Object transaction);
+    abstract class Implementation {
+        abstract fun move(source: Any?, sink: Any?, maxAmount: Long, transaction: Any?): Long
     }
     
     // Platform modules will call this to inject their implementation
-    public static void setImplementation(Implementation impl) {
-        implementation = impl;
+    @JvmStatic
+    fun setImplementation(impl: Implementation) {
+        implementation = impl
     }
 }

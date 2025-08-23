@@ -1,38 +1,38 @@
-package dev.kineticcat.hexportation.api.transfer;
+package dev.kineticcat.hexportation.api.transfer
 
 /**
  * Cross-platform replacement for Fabric's StorageView interface.
  * Provides identical API so existing code needs zero changes.
  */
-public interface StorageView<T> {
+interface StorageView<T> {
     
     /**
      * Get the resource stored in this view.
      */
-    T getResource();
+    val resource: T
     
     /**
      * Get the amount stored in this view.
      */
-    long getAmount();
+    val amount: Long
     
     /**
      * Get the capacity of this view.
      */
-    long getCapacity();
+    val capacity: Long
     
     /**
      * Check if this view is blank (empty).
      */
-    boolean isBlank();
+    val isBlank: Boolean
     
     /**
      * Simulate extracting from this view.
      */
-    long simulateExtract(T resource, long maxAmount, Object transaction);
+    fun simulateExtract(resource: T, maxAmount: Long, transaction: Any?): Long
     
     /**
      * Extract from this view.
      */
-    long extract(T resource, long maxAmount, Object transaction);
+    fun extract(resource: T, maxAmount: Long, transaction: Any?): Long
 }

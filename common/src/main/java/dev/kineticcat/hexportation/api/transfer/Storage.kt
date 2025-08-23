@@ -1,40 +1,38 @@
-package dev.kineticcat.hexportation.api.transfer;
-
-import java.util.Iterator;
+package dev.kineticcat.hexportation.api.transfer
 
 /**
  * Cross-platform replacement for Fabric's Storage interface.
  * Provides identical API so existing code needs zero changes.
  */
-public interface Storage<T> {
+interface Storage<T> {
     
     /**
      * Insert into this storage.
      */
-    long insert(T resource, long maxAmount, Object transaction);
+    fun insert(resource: T, maxAmount: Long, transaction: Any?): Long
     
     /**
      * Simulate insertion into this storage.
      */
-    long simulateInsert(T resource, long maxAmount, Object transaction);
+    fun simulateInsert(resource: T, maxAmount: Long, transaction: Any?): Long
     
     /**
      * Get an iterator over all non-empty storage views.
      */
-    Iterator<StorageView<T>> nonEmptyIterator();
+    fun nonEmptyIterator(): Iterator<StorageView<T>>
     
     /**
      * Get an iterator over all storage views.
      */
-    Iterator<StorageView<T>> iterator();
+    fun iterator(): Iterator<StorageView<T>>
     
     /**
      * Extract from this storage.
      */
-    long extract(T resource, long maxAmount, Object transaction);
+    fun extract(resource: T, maxAmount: Long, transaction: Any?): Long
     
     /**
      * Simulate extraction from this storage.
      */
-    long simulateExtract(T resource, long maxAmount, Object transaction);
+    fun simulateExtract(resource: T, maxAmount: Long, transaction: Any?): Long
 }
