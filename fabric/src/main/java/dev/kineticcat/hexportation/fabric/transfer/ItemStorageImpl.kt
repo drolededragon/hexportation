@@ -39,37 +39,41 @@ object ItemStorageImpl {
         
         override fun insert(resource: ItemVariant, maxAmount: Long, transaction: Any?): Long {
             val wrapper = resource as ItemVariantImpl.FabricItemVariantWrapper
+            val fabricTransaction = (transaction as? TransactionImpl.FabricTransactionWrapper)?.getFabricTransaction()
             return fabricStorage.insert(
                 wrapper.getFabricVariant(),
                 maxAmount,
-                transaction as? FabricTransaction
+                fabricTransaction
             )
         }
         
         override fun simulateInsert(resource: ItemVariant, maxAmount: Long, transaction: Any?): Long {
             val wrapper = resource as ItemVariantImpl.FabricItemVariantWrapper
+            val fabricTransaction = (transaction as? TransactionImpl.FabricTransactionWrapper)?.getFabricTransaction()
             return fabricStorage.simulateInsert(
                 wrapper.getFabricVariant(),
                 maxAmount,
-                transaction as? FabricTransaction
+                fabricTransaction
             )
         }
         
         override fun extract(resource: ItemVariant, maxAmount: Long, transaction: Any?): Long {
             val wrapper = resource as ItemVariantImpl.FabricItemVariantWrapper
+            val fabricTransaction = (transaction as? TransactionImpl.FabricTransactionWrapper)?.getFabricTransaction()
             return fabricStorage.extract(
                 wrapper.getFabricVariant(),
                 maxAmount,
-                transaction as? FabricTransaction
+                fabricTransaction
             )
         }
         
         override fun simulateExtract(resource: ItemVariant, maxAmount: Long, transaction: Any?): Long {
             val wrapper = resource as ItemVariantImpl.FabricItemVariantWrapper
+            val fabricTransaction = (transaction as? TransactionImpl.FabricTransactionWrapper)?.getFabricTransaction()
             return fabricStorage.simulateExtract(
                 wrapper.getFabricVariant(),
                 maxAmount,
-                transaction as? FabricTransaction
+                fabricTransaction
             )
         }
         
@@ -113,20 +117,22 @@ object ItemStorageImpl {
         
         override fun simulateExtract(resource: ItemVariant, maxAmount: Long, transaction: Any?): Long {
             val wrapper = resource as ItemVariantImpl.FabricItemVariantWrapper
+            val fabricTransaction = (transaction as? TransactionImpl.FabricTransactionWrapper)?.getFabricTransaction()
             return FabricStorageUtil.simulateExtract(
                 fabricStorageView,
                 wrapper.getFabricVariant(),
                 maxAmount,
-                transaction as? FabricTransaction
+                fabricTransaction
             )
         }
         
         override fun extract(resource: ItemVariant, maxAmount: Long, transaction: Any?): Long {
             val wrapper = resource as ItemVariantImpl.FabricItemVariantWrapper
+            val fabricTransaction = (transaction as? TransactionImpl.FabricTransactionWrapper)?.getFabricTransaction()
             return fabricStorageView.extract(
                 wrapper.getFabricVariant(),
                 maxAmount,
-                transaction as? FabricTransactionContext
+                fabricTransaction
             )
         }
         

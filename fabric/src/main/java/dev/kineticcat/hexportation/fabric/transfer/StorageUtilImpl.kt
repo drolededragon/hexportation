@@ -63,12 +63,13 @@ class StorageUtilImpl : StorageUtil.StorageUtilImpl() {
         }
         
         // Delegate to the real Fabric StorageUtil
+        val fabricTransaction = (transaction as? TransactionImpl.FabricTransactionWrapper)?.getFabricTransaction()
         return FabricStorageUtil.move(
             fabricSource, 
             fabricSink, 
             wrappedFilter, 
             maxAmount, 
-            transaction as? FabricTransaction
+            fabricTransaction
         )
     }
     
@@ -98,11 +99,12 @@ class StorageUtilImpl : StorageUtil.StorageUtilImpl() {
             else -> resource
         }
         
+        val fabricTransaction = (transaction as? TransactionImpl.FabricTransactionWrapper)?.getFabricTransaction()
         return FabricStorageUtil.simulateExtract(
             fabricStorageView,
             fabricResource,
             maxAmount,
-            transaction as? FabricTransaction
+            fabricTransaction
         )
     }
 }

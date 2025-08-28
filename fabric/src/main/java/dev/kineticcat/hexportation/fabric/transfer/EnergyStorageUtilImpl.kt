@@ -24,11 +24,12 @@ class EnergyStorageUtilImpl : EnergyStorageUtil.Implementation() {
         val sinkWrapper = sink as EnergyStorageImpl.FabricEnergyWrapper
         
         // Cast back to Team Reborn Energy types and delegate to the real EnergyStorageUtil
+        val fabricTransaction = (transaction as? TransactionImpl.FabricTransactionWrapper)?.getFabricTransaction()
         return team.reborn.energy.api.EnergyStorageUtil.move(
             sourceWrapper.getTeamRebornStorage(), 
             sinkWrapper.getTeamRebornStorage(), 
             maxAmount,
-            transaction as? FabricTransaction
+            fabricTransaction
         )
     }
 }
