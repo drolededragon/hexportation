@@ -4,6 +4,7 @@ import dev.kineticcat.hexportation.api.transfer.Storage
 import dev.kineticcat.hexportation.api.transfer.StorageView
 import dev.kineticcat.hexportation.api.transfer.FluidVariant
 import dev.kineticcat.hexportation.api.transfer.FluidStorage
+import dev.kineticcat.hexportation.api.transfer.FluidConstants
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.server.level.ServerLevel
@@ -40,41 +41,57 @@ object FluidStorageImpl {
         override fun insert(resource: FluidVariant, maxAmount: Long, transaction: Any?): Long {
             val wrapper = resource as FluidVariantImpl.FabricFluidVariantWrapper
             val fabricTransaction = (transaction as? TransactionImpl.FabricTransactionWrapper)?.getFabricTransaction()
-            return fabricStorage.insert(
+            // Convert user millibuckets to Fabric droplets using established ratio
+            val dropletsAmount = maxAmount * FluidConstants.BUCKET / 1000L
+            val dropletsInserted = fabricStorage.insert(
                 wrapper.getFabricVariant(),
-                maxAmount,
+                dropletsAmount,
                 fabricTransaction
             )
+            // Convert back to millibuckets for return value
+            return dropletsInserted * 1000L / FluidConstants.BUCKET
         }
         
         override fun simulateInsert(resource: FluidVariant, maxAmount: Long, transaction: Any?): Long {
             val wrapper = resource as FluidVariantImpl.FabricFluidVariantWrapper
             val fabricTransaction = (transaction as? TransactionImpl.FabricTransactionWrapper)?.getFabricTransaction()
-            return fabricStorage.simulateInsert(
+            // Convert user millibuckets to Fabric droplets using established ratio
+            val dropletsAmount = maxAmount * FluidConstants.BUCKET / 1000L
+            val dropletsSimulated = fabricStorage.simulateInsert(
                 wrapper.getFabricVariant(),
-                maxAmount,
+                dropletsAmount,
                 fabricTransaction
             )
+            // Convert back to millibuckets for return value
+            return dropletsSimulated * 1000L / FluidConstants.BUCKET
         }
         
         override fun extract(resource: FluidVariant, maxAmount: Long, transaction: Any?): Long {
             val wrapper = resource as FluidVariantImpl.FabricFluidVariantWrapper
             val fabricTransaction = (transaction as? TransactionImpl.FabricTransactionWrapper)?.getFabricTransaction()
-            return fabricStorage.extract(
+            // Convert user millibuckets to Fabric droplets using established ratio
+            val dropletsAmount = maxAmount * FluidConstants.BUCKET / 1000L
+            val dropletsExtracted = fabricStorage.extract(
                 wrapper.getFabricVariant(),
-                maxAmount,
+                dropletsAmount,
                 fabricTransaction
             )
+            // Convert back to millibuckets for return value
+            return dropletsExtracted * 1000L / FluidConstants.BUCKET
         }
         
         override fun simulateExtract(resource: FluidVariant, maxAmount: Long, transaction: Any?): Long {
             val wrapper = resource as FluidVariantImpl.FabricFluidVariantWrapper
             val fabricTransaction = (transaction as? TransactionImpl.FabricTransactionWrapper)?.getFabricTransaction()
-            return fabricStorage.simulateExtract(
+            // Convert user millibuckets to Fabric droplets using established ratio
+            val dropletsAmount = maxAmount * FluidConstants.BUCKET / 1000L
+            val dropletsSimulated = fabricStorage.simulateExtract(
                 wrapper.getFabricVariant(),
-                maxAmount,
+                dropletsAmount,
                 fabricTransaction
             )
+            // Convert back to millibuckets for return value
+            return dropletsSimulated * 1000L / FluidConstants.BUCKET
         }
         
         override fun iterator(): Iterator<StorageView<FluidVariant>> =
@@ -109,31 +126,39 @@ object FluidStorageImpl {
         override val resource: FluidVariant get() = 
             FluidVariantImpl.wrap(fabricStorageView.getResource())
         
-        override val amount: Long get() = fabricStorageView.getAmount()
+        override val amount: Long get() = fabricStorageView.getAmount() * 1000L / FluidConstants.BUCKET
         
-        override val capacity: Long get() = fabricStorageView.getCapacity()
+        override val capacity: Long get() = fabricStorageView.getCapacity() * 1000L / FluidConstants.BUCKET
         
         override val isBlank: Boolean get() = fabricStorageView.getResource().isBlank()
         
         override fun simulateExtract(resource: FluidVariant, maxAmount: Long, transaction: Any?): Long {
             val wrapper = resource as FluidVariantImpl.FabricFluidVariantWrapper
             val fabricTransaction = (transaction as? TransactionImpl.FabricTransactionWrapper)?.getFabricTransaction()
-            return FabricStorageUtil.simulateExtract(
+            // Convert user millibuckets to Fabric droplets using established ratio
+            val dropletsAmount = maxAmount * FluidConstants.BUCKET / 1000L
+            val dropletsSimulated = FabricStorageUtil.simulateExtract(
                 fabricStorageView,
                 wrapper.getFabricVariant(),
-                maxAmount,
+                dropletsAmount,
                 fabricTransaction
             )
+            // Convert back to millibuckets for return value
+            return dropletsSimulated * 1000L / FluidConstants.BUCKET
         }
         
         override fun extract(resource: FluidVariant, maxAmount: Long, transaction: Any?): Long {
             val wrapper = resource as FluidVariantImpl.FabricFluidVariantWrapper
             val fabricTransaction = (transaction as? TransactionImpl.FabricTransactionWrapper)?.getFabricTransaction()
-            return fabricStorageView.extract(
+            // Convert user millibuckets to Fabric droplets using established ratio
+            val dropletsAmount = maxAmount * FluidConstants.BUCKET / 1000L
+            val dropletsExtracted = fabricStorageView.extract(
                 wrapper.getFabricVariant(),
-                maxAmount,
+                dropletsAmount,
                 fabricTransaction
             )
+            // Convert back to millibuckets for return value
+            return dropletsExtracted * 1000L / FluidConstants.BUCKET
         }
         
         fun getFabricStorageView() = fabricStorageView
